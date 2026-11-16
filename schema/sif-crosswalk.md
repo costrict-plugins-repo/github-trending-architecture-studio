@@ -1,0 +1,7 @@
+# Arch Studio conversion mapping contract
+
+This is Arch Studio's internal conversion procedure, not a SIF/vendor field manual. The target/source system and version determine their own field definitions. Retrieve the original authorized vendor specification or use supplied verified mapping evidence before interpreting codes, delimiters, record boundaries, encoding, currency, options or price semantics. Missing vendor coverage in the source catalog remains a gap; do not invent a standard mapping or manufacturer abbreviation.
+
+Build a task mapping with one row per source field: source code/name, original version/locator, internal Arch Studio field, direction, conversion, unknown-value treatment and loss/preservation note. The internal product fields are owned by [product schema](product-schema.md); quantities and project tags must remain explicit. Preserve distinctions between unit/list/sell/cost/extended prices and currencies. A source format without a currency field does not prove USD.
+
+Keep unmapped fields in source-bound task evidence and disclose losses before export/adoption. Manufacturer identities/codes are supplied or verified at their original source, never guessed from a name. Unknown codes remain unknown. Pairing/repetition and multiline rules come from the actual format version. Validate a generated file against that specification or actual authorized target importer; a text file alone does not establish system compatibility.

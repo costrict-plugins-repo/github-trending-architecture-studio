@@ -1,0 +1,24 @@
+# Rules
+
+Rules are cross-cutting conventions that shape every skill output across the whole Arch Studio plugin (`as`). Unlike skills (invoked with a slash command), rules are never invoked — and they are NOT auto-loaded: each skill, agent, or hook that needs a rule references its file explicitly (see [How Rules Work](#how-rules-work--honestly) below). This directory ships inside the plugin as its internal reference docs.
+
+| Rule | What it governs |
+|------|-----------------|
+| [units-and-measurements](./units-and-measurements.md) | Imperial/metric defaults, area types (GSF/USF/RSF), dimension formatting |
+| [code-citations](./code-citations.md) | Building code references — edition years, section symbols, jurisdiction awareness |
+| [professional-disclaimer](./professional-disclaimer.md) | Disclaimer language, what AI outputs can and cannot claim |
+| [csi-formatting](./csi-formatting.md) | Formatting and citation procedure using applicable original-source inputs |
+| [terminology](./terminology.md) | Style and first-use conventions; original-source retrieval for factual orientation |
+| [output-formatting](./output-formatting.md) | Tables, headings, source attribution, file naming, list structure |
+| [transparency](./transparency.md) | Show your work — link sources, expose inputs, make outputs verifiable |
+
+| [moments](./moments.md) | Shared session line and task-proportionate invocation/setup behavior |
+
+## How Rules Work — honestly
+
+Claude Code has no mechanism that auto-loads a `rules/` directory, so these bind at two different strengths:
+
+- **Hook-enforced (1):** `professional-disclaimer` is checked mechanically by `post-write-disclaimer-check`, which ships with the plugin in root `hooks/`. The check is marker-driven — skills emit `<!-- architecture-studio:requires-disclaimer -->` and the hook verifies the canonical block.
+- **Advisory:** the other rules are conventions written into the skills and agents that need them — the skill bodies carry the relevant rules inline, and these files are the canonical reference they're kept consistent with. Nothing enforces them at runtime.
+
+If a rule matters enough to your practice to enforce, the pattern is in the hook-enforced disclaimer rule: have skills emit a marker, check the marker in a hook. Rules are not invoked directly.
